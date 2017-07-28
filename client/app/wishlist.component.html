@@ -1,0 +1,41 @@
+
+<h2> My Wish List </h2>
+<form class="well" (submit)="addWish($event)">
+    <div class="form-group" >
+       <input type ="text"  [(ngModel)]="wishTitle" name="wishTitle"  class="form-control" placeholder="I wish I could...">
+    </div>
+ </form>
+<hr>
+
+<div *ngFor="let wish1 of wishes">
+<div class="wish-list">
+<div class="col-md-1">
+   <input type="checkbox" >
+</div>
+   <!-- further dev have a default button unless activated -->
+   <div class="col-md-7">
+       {{wish1.iWish}}
+     
+       <!-- <input type = "button"  (click) = "wish1.wishStarted= !(wish1.wishStarted)"   value="{{wish1.wishStarted? 'Work Halted':'Start Work'}}" >-->
+       
+       <input type = "button"  (click) = "workStatus(wish1)" class = "btn {{wish1.wishStarted?'btn-primary':'btn-warning'}} pull-right" value="{{wish1.wishStarted? 'pause work':'start work'}}" >
+       <!--<input type = "button"  (click) = "workStatus(wish1)" ngClass="{btn-success:wish1.wishStarted == true,btn-warning:wish1.wishStarted==false}" value="{{wish1.wishStarted? 'Work Halted':'Start Work'}}" >-->
+       <!-- <input type = "button"  (click) = "onClick()" [class.selected] = "wish1.wishStarted?'btn-warning':'btn-success'" value="hello">class = "btn {{wish1.wishStarted?'btn-warning':'btn-success'}} pull-right"-->
+    </div>
+    
+        
+    
+    <div class="col-md-4">
+        <input type="button" (click)="deleteWish(wish1._id)" value="Delete" class="btn btn-danger">
+    </div>
+    <br><br>
+</div>
+<div class="progress">
+    <div class="progress-bar" [style.width.%]= "100 - ((wish1.currTime/86400)*100)" ></div>
+</div>
+</div>
+<script>
+$( "button" ).click(function() {
+  $( this ).toggleClass( "btn-warning btn-success" );
+});
+</script>
